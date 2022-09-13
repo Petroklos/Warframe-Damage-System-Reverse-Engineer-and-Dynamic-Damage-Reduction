@@ -23,5 +23,9 @@ void FrequencyCalculation::setMultishotMultiplier(double d) { MS.setMultiplier(d
 void FrequencyCalculation::setMultishotAdditive(double d) { MS.setAdditive(d); }
 
 double FrequencyCalculation::getAdjustedFireRate() {
-	return (FR.calculateTotal() - RT.calculate() * FR.calculateTotal() / MC.calculateTotal()) * MS.calculateTotal();
+	// Fire Rate = x ammo/second , Magazine Capacity = y ammo , Reload Time = z seconds
+	double timeToEmpty = MC.calculateTotal() / FR.calculateTotal(); // y / x = a seconds
+	double fullCycle = timeToEmpty + RT.calculate();				// a + z = b seconds
+	double adjustedFireRate = MC.calculateTotal() / fullCycle;		// y / b = ammo/second
+	return adjustedFireRate;
 }
