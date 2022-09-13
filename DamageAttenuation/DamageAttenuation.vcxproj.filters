@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\DamageInstance">
+      <UniqueIdentifier>{a05aa5d6-bebe-45ba-b34c-aecdb7e2477d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DamageFrequency">
+      <UniqueIdentifier>{0867bff3-7941-417f-8f72-d70b23a3b154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DamageInstance">
+      <UniqueIdentifier>{988f3a54-5cfd-4c2d-aa77-7bfc848282b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DamageFrequency">
+      <UniqueIdentifier>{9470b3e7-7308-42b0-8987-e55fc0b84d72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Calculations">
+      <UniqueIdentifier>{2ec24fd1-292c-4dd4-9c3e-8120dd3f26a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Calculations">
+      <UniqueIdentifier>{0fee8fab-9f79-4a88-9456-a4a79b05b06a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BaseDamage.h">
+      <Filter>Header Files\DamageInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="CriticalChance.h">
+      <Filter>Header Files\DamageInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="CriticalDamage.h">
+      <Filter>Header Files\DamageInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="FireRate.h">
+      <Filter>Header Files\DamageFrequency</Filter>
+    </ClInclude>
+    <ClInclude Include="GenericStat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MagazineCapacity.h">
+      <Filter>Header Files\DamageFrequency</Filter>
+    </ClInclude>
+    <ClInclude Include="ReloadTime.h">
+      <Filter>Header Files\DamageFrequency</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageCalculation.h">
+      <Filter>Header Files\Calculations</Filter>
+    </ClInclude>
+    <ClInclude Include="FrequencyCalculation.h">
+      <Filter>Header Files\Calculations</Filter>
+    </ClInclude>
+    <ClInclude Include="Multishot.h">
+      <Filter>Header Files\DamageFrequency</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmorReduction.h">
+      <Filter>Header Files\Calculations</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseDamage.cpp">
+      <Filter>Source Files\DamageInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="CriticalChance.cpp">
+      <Filter>Source Files\DamageInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="CriticalDamage.cpp">
+      <Filter>Source Files\DamageInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="GenericStat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FireRate.cpp">
+      <Filter>Source Files\DamageFrequency</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MagazineCapacity.cpp">
+      <Filter>Source Files\DamageFrequency</Filter>
+    </ClCompile>
+    <ClCompile Include="ReloadTime.cpp">
+      <Filter>Source Files\DamageFrequency</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageCalculation.cpp">
+      <Filter>Source Files\Calculations</Filter>
+    </ClCompile>
+    <ClCompile Include="FrequencyCalculation.cpp">
+      <Filter>Source Files\Calculations</Filter>
+    </ClCompile>
+    <ClCompile Include="Multishot.cpp">
+      <Filter>Source Files\DamageFrequency</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmorReduction.cpp">
+      <Filter>Source Files\Calculations</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
