@@ -24,11 +24,18 @@ double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor)
 bool attenuatedWeakspots = false;
 double weakPointMultiplier = 3;
 
+
 int main() {
 	DamageCalculation DC;
 	int viralProcs = 1;
 	double totalDamage = calculateDamage(DC) * applyViralProcs(viralProcs);
-	if (attenuatedWeakspots) totalDamage = totalDamage * weakPointMultiplier;
+	//if (attenuatedWeakspots) totalDamage = totalDamage * weakPointMultiplier;
+
+	//jankily implemented Trumna Headshot Multiplier
+	if (!attenuatedWeakspots) {
+		double AoEpercent = 50 / (82 + 50);
+		totalDamage = totalDamage * weakPointMultiplier * (1 - AoEpercent) + totalDamage * AoEpercent;
+	}
 
 	ArmorReduction AR;
 	double armoredDamage = totalDamage * calculateArmor(AR);
@@ -45,7 +52,13 @@ int main() {
 
 	double notArmor = 1000000; // The lower this is, the faster and harsher the Attenuation will be.
 	double attenuatedDamage = attenuateDamage(armoredDamage, estimatedDPS, notArmor); // won't Attenuate if notArmor == 0
-	if (!attenuatedWeakspots) attenuatedDamage = attenuatedDamage * weakPointMultiplier;
+	//if (!attenuatedWeakspots) attenuatedDamage = attenuatedDamage * weakPointMultiplier;
+
+	//jankily implemented Trumna Headshot Multiplier
+	if (!attenuatedWeakspots) {
+		double AoEpercent = 50 / (82 + 50);
+		attenuatedDamage = attenuatedDamage * weakPointMultiplier * (1 - AoEpercent) + attenuatedDamage * AoEpercent;
+	}
 
 #if isDebugging
 	std::cout << "Total Damage is : " << totalDamage << std::endl
@@ -60,25 +73,25 @@ int main() {
 }
 
 double calculateDamage(DamageCalculation & DC) {
-	DC.setDamageBase(10);
-	DC.setDamageMultiplier(1.65 + 3.6);
-	DC.setCriticalChanceBase(0.25);
-	DC.setCriticalChanceMultiplier(2 + 1.35);
-	DC.setCriticalChanceAdditive(.45);
+	DC.setDamageBase(132);
+	DC.setDamageMultiplier(1.65 + 3.6 - 0.15); // = Base + Serration + Primary Arcane at Full Stacks - Vile Acceleration
+	DC.setCriticalChanceBase(0.24);
+	DC.setCriticalChanceMultiplier(2 + 1.35); // = Base + Critical Delay + Argon Scope
+	DC.setCriticalChanceAdditive(.45); // = Arcane Avenger
 	DC.setCriticalDamageBase(2.2);
-	DC.setCriticalDamageMultiplier(1.2 + .6);
+	DC.setCriticalDamageMultiplier(1.2 + .6); // = Base + Vital Sense + Hammer Shot
 	return DC.getDamage();
 }
 
 double calculateFrequency(FrequencyCalculation & FRC) {
-	FRC.setFireRateBase(10);
-	FRC.setFireRateMultiplier(0.6);
-	FRC.setMagazineCapacityBase(25);
-	FRC.setMagazineCapacityMultiplier(0.3);
-	FRC.setReloadTimeBase(1);
-	FRC.setReloadTimeDivider(0.3);
+	FRC.setFireRateBase(4.67);
+	FRC.setFireRateMultiplier(0.9); // = Base + Vile Acceleration
+	FRC.setMagazineCapacityBase(200);
+	FRC.setMagazineCapacityMultiplier(0.55); // = Base + Primed Magazine Warp
+	FRC.setReloadTimeBase(5);
+	FRC.setReloadTimeDivider(0.55); // = Base + Primed Fast Hands
 	FRC.setMultishotBase(1);
-	FRC.setMultishotMultiplier(0.8 + .3 * 5);
+	FRC.setMultishotMultiplier(0.8 + .3 * 5); // = Base + Galvanized Chamber at Full Stacks
 	return FRC.getAdjustedFireRate();
 }
 
@@ -95,7 +108,7 @@ double applyViralProcs(int i) {
 }
 
 double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor) {
-	if (notArmor == 0) return 1;
+	if (notArmor == 0) return 1; // won't Attenuate if notArmor == 0
 
 	double part = (2 * estimatedDPS) + (1 - (2 * estimatedDPS + totalDamage) / (2 * estimatedDPS + totalDamage + notArmor)) * totalDamage;
 	double attenuateValue = part / (part + notArmor);

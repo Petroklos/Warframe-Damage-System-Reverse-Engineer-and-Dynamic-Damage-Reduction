@@ -23,5 +23,5 @@ void FrequencyCalculation::setMultishotMultiplier(double d) { MS.setMultiplier(d
 void FrequencyCalculation::setMultishotAdditive(double d) { MS.setAdditive(d); }
 
 double FrequencyCalculation::getAdjustedFireRate() {
-	return (FR.calculateTotal() - RT.calculate() * MC.calculateTotal() / FR.calculateTotal()) * MS.calculateTotal();
+	return (FR.calculateTotal() - RT.calculate() * FR.calculateTotal() / MC.calculateTotal()) * MS.calculateTotal();
 }
