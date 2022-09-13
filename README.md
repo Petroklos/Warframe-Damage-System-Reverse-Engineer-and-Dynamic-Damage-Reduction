@@ -1,4 +1,4 @@
-# Warframe-Damage-Calculation-and-Attenuation
+# Warframe Damage Calculation and Attenuation
 
 Writting out Warframe's Damage Calculation to test out potential Damage Attenuation Formulas and Implementations.
 
