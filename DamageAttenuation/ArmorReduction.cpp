@@ -71,3 +71,9 @@ void ArmorReduction::calculateArmorDR() { armorDR = 1 - (netArmor / (netArmor + 
 
 double ArmorReduction::getNetArmor() { return netArmor; }
 double ArmorReduction::getArmorDR() { return armorDR; }
+
+void ArmorReduction::corrosiveProcs(int i) {
+	double corrosiveModifier = 1 - (0.20 + 0.06 * i) * (i > 0 && i <= 10);
+	netArmor *= corrosiveModifier;
+	calculateArmorDR();
+}

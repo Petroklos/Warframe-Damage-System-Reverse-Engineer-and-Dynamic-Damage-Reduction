@@ -4,6 +4,7 @@ DamageCalculation::DamageCalculation() {
 	BD = BaseDamage();
 	CC = CriticalChance();
 	CD = CriticalDamage();
+	FD = FactionDamage();
 }
 
 void DamageCalculation::setDamageBase(double d) { BD.setBase(d); }
@@ -18,6 +19,10 @@ void DamageCalculation::setCriticalDamageBase(double d) { CD.setBase(d); }
 void DamageCalculation::setCriticalDamageMultiplier(double d) { CD.setMultiplier(d); }
 void DamageCalculation::setCriticalDamageAdditive(double d) { CD.setAdditive(d); }
 
+void DamageCalculation::setFactionDamageBase(double d) { FD.setBase(d); }
+void DamageCalculation::setFactionDamageMultiplier(double d) { FD.setMultiplier(d); }
+void DamageCalculation::setFactionDamageAdditive(double d) { FD.setAdditive(d); }
+
 double DamageCalculation::getDamage() {
-	return BD.calculateTotal() * CD.calculateTotal(CC.calculateTotal());
+	return BD.calculateTotal() * CD.calculateTotal(CC.calculateTotal()) * FD.calculateTotal();
 }

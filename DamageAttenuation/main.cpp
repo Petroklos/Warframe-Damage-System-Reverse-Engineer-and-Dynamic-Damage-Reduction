@@ -21,13 +21,13 @@ double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor)
 // to reward aiming and open up design space for Bosses that are a mechanical skillcheck,
 // with interesting and complicated movement patterns to be mastered instead of our Damage being just a DPS Check.
 // So I would set the "attenuatedWeakspots" variable as "false".
-bool attenuatedWeakspots = false;
+bool attenuatedWeakspots = true;
 double weakPointMultiplier = 3;
 
 
 int main() {
 	DamageCalculation DC;
-	int viralProcs = 1;
+	int viralProcs = 10;
 	double totalDamage = calculateDamage(DC) * applyViralProcs(viralProcs);
 	//if (attenuatedWeakspots) totalDamage = totalDamage * weakPointMultiplier;
 
@@ -42,11 +42,11 @@ int main() {
 
 //	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
-	FrequencyCalculation FRC;	
+	FrequencyCalculation FRC;
+
 	double adjustedFrequency = calculateFrequency(FRC);
 
 	double estimatedDPS = armoredDamage * adjustedFrequency;
-
 
 //	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
@@ -62,9 +62,9 @@ int main() {
 
 #if isDebugging
 	std::cout << "Total Damage is : " << totalDamage << std::endl
-		<< "Total Damage after Armor DR is : " << totalDamage << std::endl
+		<< "Total Damage after Armor DR is : " << armoredDamage << std::endl
 		<< "Adjusted Shot Frequency is : " << adjustedFrequency << std::endl
-		<< "Estimated DPS, after Armor DR if applicable, is : " << estimatedDPS << std::endl
+		<< "Estimated DPS after Armor DR is : " << estimatedDPS << std::endl
 		<< "Total Damage after Attenuation is : " << attenuatedDamage << std::endl
 		<< "Estimated DPS after Attenuation is : " << attenuatedDamage * adjustedFrequency << std::endl;
 #endif
@@ -80,7 +80,26 @@ double calculateDamage(DamageCalculation & DC) {
 	DC.setCriticalChanceAdditive(.45); // Arcane Avenger
 	DC.setCriticalDamageBase(2.2);
 	DC.setCriticalDamageMultiplier(1.2 + .6); // Vital Sense + Hammer Shot
+	DC.setFactionDamageBase(1);
+	DC.setFactionDamageMultiplier(0.55); // Primed Faction Mod
+
+	// DC.setDamageMultiplier(2.75 * 2); // 200% PWR STR Chroma Vex Armor
+	// DC.setCriticalChanceAdditive(2); // Covenant Headshots
+
 	return DC.getDamage();
+}
+
+double applyViralProcs(int i) {
+	return 1 + (0.75 + 0.25 * i) * (i > 0 && i <= 10);
+}
+
+double calculateArmor(ArmorReduction& AR) {
+	// Heavy Gunner Stats : Base Armor = 500, Base Level = 8
+	AR.setBaseArmor(500);
+	AR.setBaseLevel(8);
+	AR.setLevel(100);
+	// AR.corrosiveProcs(10);
+	return AR.getArmorDR();
 }
 
 double calculateFrequency(FrequencyCalculation & FRC) {
@@ -92,25 +111,17 @@ double calculateFrequency(FrequencyCalculation & FRC) {
 	FRC.setReloadTimeDivider(0.55); // Primed Fast Hands
 	FRC.setMultishotBase(1);
 	FRC.setMultishotMultiplier(0.8 + .3 * 5); // Galvanized Chamber at Full Stacks
+
+	//FRC.setFireRateMultiplier(0.35 * 2); // 200% PWR STR Harrow
+	//FRC.setReloadTimeDivider(0.7 * 2); // 200% PWR STR Harrow
+
 	return FRC.getAdjustedFireRate();
-}
-
-double calculateArmor(ArmorReduction & AR) {
-	// Heavy Gunner Stats : Base Armor = 500, Base Level = 8
-	AR.setBaseArmor(500);
-	AR.setBaseLevel(8);
-	AR.setLevel(100);
-	return AR.getArmorDR();
-}
-
-double applyViralProcs(int i) {
-	return 1 + (0.75 + 0.25 * i) * (i > 0 && i < 10);
 }
 
 double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor) {
 	if (notArmor == 0) return 1; // won't Attenuate if notArmor == 0
 
-	double part = (2 * estimatedDPS) + (1 - (2 * estimatedDPS + totalDamage) / (2 * estimatedDPS + totalDamage + notArmor)) * totalDamage;
-	double attenuateValue = part / (part + notArmor);
-	return (1 - attenuateValue) * totalDamage;
+	double part = estimatedDPS + (1 - (estimatedDPS + totalDamage) / (estimatedDPS + totalDamage + notArmor)) * totalDamage;
+	double attenuateValue = 1 - part / (part + notArmor);
+	return attenuateValue * totalDamage;
 }

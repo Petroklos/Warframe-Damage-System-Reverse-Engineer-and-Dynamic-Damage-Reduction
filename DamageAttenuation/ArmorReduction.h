@@ -28,4 +28,6 @@ public:
 
 	double getNetArmor();
 	double getArmorDR();
+
+	void corrosiveProcs(int i);
 };

@@ -13,6 +13,7 @@
 #include "BaseDamage.h"
 #include "CriticalChance.h"
 #include "CriticalDamage.h"
+#include "FactionDamage.h"
 
 #pragma once
 class DamageCalculation
@@ -20,6 +21,7 @@ class DamageCalculation
 	BaseDamage BD;
 	CriticalChance CC;
 	CriticalDamage CD;
+	FactionDamage FD;
 public:
 	DamageCalculation();
 
@@ -34,6 +36,10 @@ public:
 	void setCriticalDamageBase(double d);
 	void setCriticalDamageMultiplier(double d);
 	void setCriticalDamageAdditive(double d);
+
+	void setFactionDamageBase(double d);
+	void setFactionDamageMultiplier(double d);
+	void setFactionDamageAdditive(double d);
 
 	double getDamage();
 };

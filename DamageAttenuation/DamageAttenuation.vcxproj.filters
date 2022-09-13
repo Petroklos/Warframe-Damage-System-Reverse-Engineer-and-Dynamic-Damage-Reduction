@@ -66,6 +66,9 @@
     <ClInclude Include="ArmorReduction.h">
       <Filter>Header Files\Calculations</Filter>
     </ClInclude>
+    <ClInclude Include="FactionDamage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseDamage.cpp">
@@ -103,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="ArmorReduction.cpp">
       <Filter>Source Files\Calculations</Filter>
+    </ClCompile>
+    <ClCompile Include="FactionDamage.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
