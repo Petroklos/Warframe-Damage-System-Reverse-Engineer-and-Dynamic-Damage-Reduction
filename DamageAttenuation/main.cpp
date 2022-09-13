@@ -33,10 +33,15 @@ int main() {
 	ArmorReduction AR;
 	double armoredDamage = totalDamage * calculateArmor(AR);
 
+//	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
+
 	FrequencyCalculation FRC;	
 	double adjustedFrequency = calculateFrequency(FRC);
 
 	double estimatedDPS = armoredDamage * adjustedFrequency;
+
+
+//	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
 	double notArmor = 1000000; // The lower this is, the faster and harsher the Attenuation will be
 	double attenuatedDamage = attenuateDamage(armoredDamage, estimatedDPS, notArmor);
