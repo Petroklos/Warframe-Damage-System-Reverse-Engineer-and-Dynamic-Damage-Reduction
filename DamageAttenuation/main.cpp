@@ -33,7 +33,7 @@ int main() {
 
 	//jankily implemented Trumna Headshot Multiplier
 	if (!attenuatedWeakspots) {
-		double AoEpercent = 50 / (82 + 50);
+		double AoEpercent = 50 / (50 + 82);
 		totalDamage = totalDamage * weakPointMultiplier * (1 - AoEpercent) + totalDamage * AoEpercent;
 	}
 
@@ -56,7 +56,7 @@ int main() {
 
 	//jankily implemented Trumna Headshot Multiplier
 	if (!attenuatedWeakspots) {
-		double AoEpercent = 50 / (82 + 50);
+		double AoEpercent = 50 / (50 + 82);
 		attenuatedDamage = attenuatedDamage * weakPointMultiplier * (1 - AoEpercent) + attenuatedDamage * AoEpercent;
 	}
 
@@ -74,24 +74,24 @@ int main() {
 
 double calculateDamage(DamageCalculation & DC) {
 	DC.setDamageBase(132);
-	DC.setDamageMultiplier(1.65 + 3.6 - 0.15); // = Base + Serration + Primary Arcane at Full Stacks - Vile Acceleration
+	DC.setDamageMultiplier(1.65 + 3.6 - 0.15); // Serration + Primary Arcane at Full Stacks - Vile Acceleration
 	DC.setCriticalChanceBase(0.24);
-	DC.setCriticalChanceMultiplier(2 + 1.35); // = Base + Critical Delay + Argon Scope
-	DC.setCriticalChanceAdditive(.45); // = Arcane Avenger
+	DC.setCriticalChanceMultiplier(2 + 1.35); // Critical Delay + Argon Scope
+	DC.setCriticalChanceAdditive(.45); // Arcane Avenger
 	DC.setCriticalDamageBase(2.2);
-	DC.setCriticalDamageMultiplier(1.2 + .6); // = Base + Vital Sense + Hammer Shot
+	DC.setCriticalDamageMultiplier(1.2 + .6); // Vital Sense + Hammer Shot
 	return DC.getDamage();
 }
 
 double calculateFrequency(FrequencyCalculation & FRC) {
 	FRC.setFireRateBase(4.67);
-	FRC.setFireRateMultiplier(0.9); // = Base + Vile Acceleration
+	FRC.setFireRateMultiplier(0.9); // Vile Acceleration
 	FRC.setMagazineCapacityBase(200);
-	FRC.setMagazineCapacityMultiplier(0.55); // = Base + Primed Magazine Warp
+	FRC.setMagazineCapacityMultiplier(0.55); // Primed Magazine Warp
 	FRC.setReloadTimeBase(5);
-	FRC.setReloadTimeDivider(0.55); // = Base + Primed Fast Hands
+	FRC.setReloadTimeDivider(0.55); // Primed Fast Hands
 	FRC.setMultishotBase(1);
-	FRC.setMultishotMultiplier(0.8 + .3 * 5); // = Base + Galvanized Chamber at Full Stacks
+	FRC.setMultishotMultiplier(0.8 + .3 * 5); // Galvanized Chamber at Full Stacks
 	return FRC.getAdjustedFireRate();
 }
 
