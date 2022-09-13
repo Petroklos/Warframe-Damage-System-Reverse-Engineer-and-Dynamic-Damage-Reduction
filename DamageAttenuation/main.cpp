@@ -43,8 +43,8 @@ int main() {
 
 //	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
-	double notArmor = 1000000; // The lower this is, the faster and harsher the Attenuation will be
-	double attenuatedDamage = attenuateDamage(armoredDamage, estimatedDPS, notArmor);
+	double notArmor = 1000000; // The lower this is, the faster and harsher the Attenuation will be.
+	double attenuatedDamage = attenuateDamage(armoredDamage, estimatedDPS, notArmor); // won't Attenuate if notArmor == 0
 	if (!attenuatedWeakspots) attenuatedDamage = attenuatedDamage * weakPointMultiplier;
 
 #if isDebugging
@@ -95,6 +95,8 @@ double applyViralProcs(int i) {
 }
 
 double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor) {
+	if (notArmor == 0) return 1;
+
 	double part = (2 * estimatedDPS) + (1 - (2 * estimatedDPS + totalDamage) / (2 * estimatedDPS + totalDamage + notArmor)) * totalDamage;
 	double attenuateValue = part / (part + notArmor);
 	return (1 - attenuateValue) * totalDamage;
