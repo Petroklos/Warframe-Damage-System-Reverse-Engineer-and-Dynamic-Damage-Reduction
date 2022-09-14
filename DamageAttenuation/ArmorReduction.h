@@ -16,12 +16,12 @@ class ArmorReduction
 	double armorDR;
 public:
 	ArmorReduction();
-	ArmorReduction(double d, int l, int b);
-	ArmorReduction(double d, int l, int b, bool e);
+	ArmorReduction(double, int, int);
+	ArmorReduction(double, int, int, bool);
 
-	void setBaseArmor(double d);
-	void setLevel(int i);
-	void setBaseLevel(int i);
+	void setBaseArmor(double);
+	void setLevel(int);
+	void setBaseLevel(int);
 
 	void calculateNetArmor();
 	void calculateArmorDR();
@@ -29,5 +29,5 @@ public:
 	double getNetArmor();
 	double getArmorDR();
 
-	void corrosiveProcs(int i);
+	void corrosiveProcs(int);
 };

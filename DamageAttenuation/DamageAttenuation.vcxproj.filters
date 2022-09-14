@@ -66,13 +66,16 @@
     <ClInclude Include="ArmorReduction.h">
       <Filter>Header Files\Calculations</Filter>
     </ClInclude>
-    <ClInclude Include="FactionDamage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RadialDamage.h">
       <Filter>Header Files\DamageInstance</Filter>
     </ClInclude>
     <ClInclude Include="WeakpointBonus.h">
+      <Filter>Header Files\DamageInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="FactionDamage.h">
+      <Filter>Header Files\DamageInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="ElementalDamage.h">
       <Filter>Header Files\DamageInstance</Filter>
     </ClInclude>
   </ItemGroup>
@@ -113,13 +116,16 @@
     <ClCompile Include="ArmorReduction.cpp">
       <Filter>Source Files\Calculations</Filter>
     </ClCompile>
-    <ClCompile Include="FactionDamage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RadialDamage.cpp">
       <Filter>Source Files\DamageInstance</Filter>
     </ClCompile>
     <ClCompile Include="WeakpointBonus.cpp">
+      <Filter>Source Files\DamageInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="FactionDamage.cpp">
+      <Filter>Source Files\DamageInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="ElementalDamage.cpp">
       <Filter>Source Files\DamageInstance</Filter>
     </ClCompile>
   </ItemGroup>

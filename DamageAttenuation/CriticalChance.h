@@ -9,8 +9,8 @@ class CriticalChance : public GenericStat
 	double vigilanteBonus;
 public:
 	CriticalChance();
-	CriticalChance(double b, double m, double a, double v);
+	CriticalChance(double, double, double, double);
 
-	void setVigilanteBonus(double d);
+	void setVigilanteBonus(double);
 	double getVigilanteBonus();
 };

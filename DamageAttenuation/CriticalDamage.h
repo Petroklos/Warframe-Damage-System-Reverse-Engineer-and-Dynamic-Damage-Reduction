@@ -8,5 +8,5 @@ class CriticalDamage : public GenericStat
 {
 	using GenericStat::GenericStat;
 public:
-	double calculateTotal(double criticalChance, double vigilanteBonus);
+	double calculateTotal(double, double);
 };

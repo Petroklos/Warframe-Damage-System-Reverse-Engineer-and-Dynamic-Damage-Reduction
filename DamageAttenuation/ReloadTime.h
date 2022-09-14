@@ -5,11 +5,11 @@ class ReloadTime
 	double divider;
 public:
 	ReloadTime();
-	ReloadTime(double r);
-	ReloadTime(double r, double d);
+	ReloadTime(double);
+	ReloadTime(double, double);
 
-	void setReload(double r);
-	void setDivider(double d);
+	void setReload(double);
+	void setDivider(double);
 
 	double getReload();
 	double getDivider();

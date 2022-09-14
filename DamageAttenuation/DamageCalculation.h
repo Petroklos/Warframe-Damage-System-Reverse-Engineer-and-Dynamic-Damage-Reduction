@@ -12,9 +12,10 @@
 
 #include "BaseDamage.h"
 #include "RadialDamage.h"
+#include "WeakpointBonus.h"
+#include "ElementalDamage.h";
 #include "CriticalChance.h"
 #include "CriticalDamage.h"
-#include "WeakpointBonus.h"
 #include "FactionDamage.h"
 
 #pragma once
@@ -22,38 +23,43 @@ class DamageCalculation
 {
 	BaseDamage BD;
 	RadialDamage RD;
+	WeakpointBonus WB;
+	ElementalDamage ED;
 	CriticalChance CC;
 	CriticalDamage CD;
-	WeakpointBonus WB;
 	FactionDamage FD;
 	double vigilanteBonus;
 public:
 	DamageCalculation();
 
-	void setDamageBase(double d);
-	void setDamageMultiplier(double d);
-	void setDamageAdditive(double d);
+	void setDamageBase(double);
+	void setDamageMultiplier(double);
+	void setDamageAdditive(double);
 
-	void setRadialDamageBase(double d);
-	void setRadialDamageMultiplier(double d);
-	void setRadialDamageAdditive(double d);
+	void setRadialDamageBase(double);
+	void setRadialDamageMultiplier(double);
+	void setRadialDamageAdditive(double);
 
-	void setCriticalChanceBase(double d);
-	void setCriticalChanceMultiplier(double d);
-	void setCriticalChanceAdditive(double d);
-	void setCriticalChanceVigilante(double d);
+	void setWeakpointBonusBase(double);
+	void setWeakpointBonusMultiplier(double);
+	void setWeakpointBonusAdditive(double);
 
-	void setCriticalDamageBase(double d);
-	void setCriticalDamageMultiplier(double d);
-	void setCriticalDamageAdditive(double d);
+	void setElementalBase(double);
+	void setElementalMultiplier(int, double);
+	void setElementalAdditive(double);
 
-	void setWeakpointBonusBase(double d);
-	void setWeakpointBonusMultiplier(double d);
-	void setWeakpointBonusAdditive(double d);
+	void setCriticalChanceBase(double);
+	void setCriticalChanceMultiplier(double);
+	void setCriticalChanceAdditive(double);
+	void setCriticalChanceVigilante(double);
 
-	void setFactionDamageBase(double d);
-	void setFactionDamageMultiplier(double d);
-	void setFactionDamageAdditive(double d);
+	void setCriticalDamageBase(double);
+	void setCriticalDamageMultiplier(double);
+	void setCriticalDamageAdditive(double);
+
+	void setFactionDamageBase(double);
+	void setFactionDamageMultiplier(double);
+	void setFactionDamageAdditive(double);
 
 	double getDamage();
 };

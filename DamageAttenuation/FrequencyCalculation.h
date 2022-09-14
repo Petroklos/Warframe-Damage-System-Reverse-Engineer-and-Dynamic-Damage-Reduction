@@ -25,21 +25,21 @@ class FrequencyCalculation
 public:
 	FrequencyCalculation();
 
-	void setFireRateBase(double d);
-	void setFireRateMultiplier(double d);
-	void setFireRateAdditive(double d);
+	void setFireRateBase(double);
+	void setFireRateMultiplier(double);
+	void setFireRateAdditive(double);
 
-	void setMagazineCapacityBase(double d);
-	void setMagazineCapacityMultiplier(double d);
-	void setMagazineCapacityAdditive(double d);
+	void setMagazineCapacityBase(double);
+	void setMagazineCapacityMultiplier(double);
+	void setMagazineCapacityAdditive(double);
 
-	void setReloadTimeBase(double d);
-	void setReloadTimeDivider(double d);
-	void setReloadTimeAdditive(double d);
+	void setReloadTimeBase(double);
+	void setReloadTimeDivider(double);
+	void setReloadTimeAdditive(double);
 
-	void setMultishotBase(double d);
-	void setMultishotMultiplier(double d);
-	void setMultishotAdditive(double d);
+	void setMultishotBase(double);
+	void setMultishotMultiplier(double);
+	void setMultishotAdditive(double);
 
 	double getAdjustedFireRate();
 };

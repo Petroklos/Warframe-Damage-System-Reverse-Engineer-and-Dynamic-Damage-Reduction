@@ -6,13 +6,13 @@ class GenericStat
 	double additive;
 public:
 	GenericStat();
-	GenericStat(double b);
-	GenericStat(double b, double m);
-	GenericStat(double b, double m, double a);
+	GenericStat(double);
+	GenericStat(double, double);
+	GenericStat(double, double, double);
 
-	void setBase(double b);
-	void setMultiplier(double m);
-	void setAdditive(double a);
+	void setBase(double);
+	void setMultiplier(double);
+	void setAdditive(double);
 
 	double getBase();
 	double getMultiplier();

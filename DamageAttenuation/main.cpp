@@ -11,15 +11,15 @@
 
 #define isDebugging true;
 
-double calculateDamage(DamageCalculation & DC);
-double calculateFrequency(FrequencyCalculation & FRC);
-double calculateArmor(ArmorReduction & AR);
-double applyViralProcs(int i);
+double calculateDamage(DamageCalculation &);
+double calculateFrequency(FrequencyCalculation &);
+double calculateArmor(ArmorReduction &);
+double applyViralProcs(int);
 double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor);
 
 int main() {
 	DamageCalculation DC;
-	double totalDamage = calculateDamage(DC) * applyViralProcs(0);
+	double totalDamage = calculateDamage(DC) * applyViralProcs(10);
 
 	ArmorReduction AR;
 	double armoredDamage = totalDamage * calculateArmor(AR);
@@ -69,6 +69,10 @@ double calculateDamage(DamageCalculation & DC) {
 
 	DC.setWeakpointBonusBase(3);
 	DC.setWeakpointBonusAdditive(0.3); // Primary Deadhead
+
+	DC.setElementalBase(1);
+	DC.setElementalMultiplier(0, 0.6); // Cold 60/60 for Viral
+	DC.setElementalMultiplier(3, 0.6); // Toxin 60/60 for Viral
 
 	DC.setFactionDamageBase(1);
 	DC.setFactionDamageMultiplier(0.55); // Primed Faction Mod

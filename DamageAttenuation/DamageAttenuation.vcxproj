@@ -132,6 +132,7 @@
     <ClInclude Include="CriticalChance.h" />
     <ClInclude Include="CriticalDamage.h" />
     <ClInclude Include="DamageCalculation.h" />
+    <ClInclude Include="ElementalDamage.h" />
     <ClInclude Include="FactionDamage.h" />
     <ClInclude Include="FireRate.h" />
     <ClInclude Include="FrequencyCalculation.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="CriticalChance.cpp" />
     <ClCompile Include="CriticalDamage.cpp" />
     <ClCompile Include="DamageCalculation.cpp" />
+    <ClCompile Include="ElementalDamage.cpp" />
     <ClCompile Include="FactionDamage.cpp" />
     <ClCompile Include="FireRate.cpp" />
     <ClCompile Include="GenericStat.cpp" />
