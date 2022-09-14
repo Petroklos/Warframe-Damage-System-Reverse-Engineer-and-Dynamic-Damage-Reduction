@@ -138,7 +138,9 @@
     <ClInclude Include="GenericStat.h" />
     <ClInclude Include="MagazineCapacity.h" />
     <ClInclude Include="Multishot.h" />
+    <ClInclude Include="RadialDamage.h" />
     <ClInclude Include="ReloadTime.h" />
+    <ClInclude Include="WeakpointBonus.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArmorReduction.cpp" />
@@ -152,8 +154,10 @@
     <ClCompile Include="MagazineCapacity.cpp" />
     <ClCompile Include="Multishot.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RadialDamage.cpp" />
     <ClCompile Include="ReloadTime.cpp" />
     <ClCompile Include="FrequencyCalculation.cpp" />
+    <ClCompile Include="WeakpointBonus.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

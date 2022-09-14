@@ -17,25 +17,9 @@ double calculateArmor(ArmorReduction & AR);
 double applyViralProcs(int i);
 double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor);
 
-// I'm of the opinion that Weakpoint Multipliers should be the only thing increasing our Damage AFTER it's been Attenuated,
-// to reward aiming and open up design space for Bosses that are a mechanical skillcheck,
-// with interesting and complicated movement patterns to be mastered instead of our Damage being just a DPS Check.
-// So I would set the "attenuatedWeakspots" variable as "false".
-bool attenuatedWeakspots = true;
-double weakPointMultiplier = 3;
-
-
 int main() {
 	DamageCalculation DC;
-	int viralProcs = 10;
-	double totalDamage = calculateDamage(DC) * applyViralProcs(viralProcs);
-	//if (attenuatedWeakspots) totalDamage = totalDamage * weakPointMultiplier;
-
-	//jankily implemented Trumna Headshot Multiplier
-	if (!attenuatedWeakspots) {
-		double AoEpercent = 50 / (50 + 82);
-		totalDamage = totalDamage * weakPointMultiplier * (1 - AoEpercent) + totalDamage * AoEpercent;
-	}
+	double totalDamage = calculateDamage(DC) * applyViralProcs(0);
 
 	ArmorReduction AR;
 	double armoredDamage = totalDamage * calculateArmor(AR);
@@ -52,13 +36,6 @@ int main() {
 
 	double notArmor = 1000000; // The lower this is, the faster and harsher the Attenuation will be.
 	double attenuatedDamage = attenuateDamage(armoredDamage, estimatedDPS, notArmor); // won't Attenuate if notArmor == 0
-	//if (!attenuatedWeakspots) attenuatedDamage = attenuatedDamage * weakPointMultiplier;
-
-	//jankily implemented Trumna Headshot Multiplier
-	if (!attenuatedWeakspots) {
-		double AoEpercent = 50 / (50 + 82);
-		attenuatedDamage = attenuatedDamage * weakPointMultiplier * (1 - AoEpercent) + attenuatedDamage * AoEpercent;
-	}
 
 #if isDebugging
 	std::cout << "Total Damage is : " << totalDamage << std::endl
@@ -73,18 +50,29 @@ int main() {
 }
 
 double calculateDamage(DamageCalculation & DC) {
-	DC.setDamageBase(132);
+	DC.setDamageBase(82); // Direct Hit Damage Portion
 	DC.setDamageMultiplier(1.65 + 3.6 - 0.15); // Serration + Primary Arcane at Full Stacks - Vile Acceleration
+	// DC.setDamageMultiplier(2.75 * 2); // 200% PWR STR Chroma Vex Armor
+
+	DC.setRadialDamageBase(50); // Radial Hit Damage Portion (AoE)
+	DC.setRadialDamageMultiplier(1.65 + 3.6 - 0.15); // Serration + Primary Arcane at Full Stacks - Vile Acceleration
+	// DC.setRadialDamageMultiplier(2.75 * 2); // 200% PWR STR Chroma Vex Armor
+
 	DC.setCriticalChanceBase(0.24);
 	DC.setCriticalChanceMultiplier(2 + 1.35); // Critical Delay + Argon Scope
 	DC.setCriticalChanceAdditive(.45); // Arcane Avenger
+	DC.setCriticalChanceVigilante(0.05 * 1); // Vigilante Armaments
+	// DC.setCriticalChanceAdditive(2); // Covenant Headshots
+
 	DC.setCriticalDamageBase(2.2);
 	DC.setCriticalDamageMultiplier(1.2 + .6); // Vital Sense + Hammer Shot
+
+	DC.setWeakpointBonusBase(3);
+	DC.setWeakpointBonusAdditive(0.3); // Primary Deadhead
+
 	DC.setFactionDamageBase(1);
 	DC.setFactionDamageMultiplier(0.55); // Primed Faction Mod
 
-	// DC.setDamageMultiplier(2.75 * 2); // 200% PWR STR Chroma Vex Armor
-	// DC.setCriticalChanceAdditive(2); // Covenant Headshots
 
 	return DC.getDamage();
 }
@@ -105,15 +93,18 @@ double calculateArmor(ArmorReduction& AR) {
 double calculateFrequency(FrequencyCalculation & FRC) {
 	FRC.setFireRateBase(4.67);
 	FRC.setFireRateMultiplier(0.9); // Vile Acceleration
+	//FRC.setFireRateMultiplier(0.35 * 2); // 200% PWR STR Harrow
+
 	FRC.setMagazineCapacityBase(200);
 	FRC.setMagazineCapacityMultiplier(0.55); // Primed Magazine Warp
+
 	FRC.setReloadTimeBase(5);
 	FRC.setReloadTimeDivider(0.55); // Primed Fast Hands
+	//FRC.setReloadTimeDivider(0.7 * 2); // 200% PWR STR Harrow
+
 	FRC.setMultishotBase(1);
 	FRC.setMultishotMultiplier(0.8 + .3 * 5); // Galvanized Chamber at Full Stacks
 
-	//FRC.setFireRateMultiplier(0.35 * 2); // 200% PWR STR Harrow
-	//FRC.setReloadTimeDivider(0.7 * 2); // 200% PWR STR Harrow
 
 	return FRC.getAdjustedFireRate();
 }

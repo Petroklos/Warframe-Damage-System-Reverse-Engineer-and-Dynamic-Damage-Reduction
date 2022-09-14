@@ -69,6 +69,12 @@
     <ClInclude Include="FactionDamage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RadialDamage.h">
+      <Filter>Header Files\DamageInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="WeakpointBonus.h">
+      <Filter>Header Files\DamageInstance</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseDamage.cpp">
@@ -109,6 +115,12 @@
     </ClCompile>
     <ClCompile Include="FactionDamage.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RadialDamage.cpp">
+      <Filter>Source Files\DamageInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="WeakpointBonus.cpp">
+      <Filter>Source Files\DamageInstance</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
