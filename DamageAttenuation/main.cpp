@@ -14,26 +14,32 @@
 void printDebug(double, double, double, double, double);
 #endif
 
-double calculateDamage(DamageCalculation &);
-double calculateFrequency(FrequencyCalculation &);
-double calculateArmor(ArmorReduction &);
-double applyViralProcs(int);
-double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor);
+void calculateDamage(DamageCalculation &);
+void calculateArmor(ArmorReduction&);
+void calculateFrequency(FrequencyCalculation &);
 
+double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor);
 
 int main() {
 	DamageCalculation DC;
-	double totalDamage = calculateDamage(DC) * applyViralProcs(10);
+	calculateDamage(DC);
+
+	// Any changes to DC must be applied before this line.
+	double totalDamage = DC.getDamage();
 
 	ArmorReduction AR;
-	double armoredDamage = totalDamage * calculateArmor(AR);
+	calculateArmor(AR);
+
+	// Any changes to AR must be applied before this line.
+	double armoredDamage = totalDamage * AR.getArmorDR();
 
 //	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
 
 	FrequencyCalculation FRC;
+	calculateFrequency(FRC);
 
-	double adjustedFrequency = calculateFrequency(FRC);
-
+	// Any changes to FRC must be applied before this line.
+	double adjustedFrequency = FRC.getAdjustedFireRate();
 	double estimatedDPS = armoredDamage * adjustedFrequency;
 
 //	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~	~
@@ -48,19 +54,19 @@ int main() {
 	return 0;
 }
 
-double calculateDamage(DamageCalculation & DC) {
-	DC.setDamageBase(82); // Direct Hit Damage Portion
-	DC.setDamageMultiplier(1.65 + 3.6 - 0.15); // Serration + Primary Arcane at Full Stacks - Vile Acceleration
+void calculateDamage(DamageCalculation & DC) {
+	DC.setDamageBase(82);
+	DC.setDamageMultiplier(1.55 + 3.6 - 0.15); // Amalgam Serration + Primary Deadhead at Full Stacks - Vile Acceleration
 	// DC.setDamageMultiplier(2.75 * 2); // 200% PWR STR Chroma Vex Armor
 
-	DC.setRadialDamageBase(50); // Radial Hit Damage Portion (AoE)
-	DC.setRadialDamageMultiplier(1.65 + 3.6 - 0.15); // Serration + Primary Arcane at Full Stacks - Vile Acceleration
+	DC.setRadialDamageBase(50);
+	DC.setRadialDamageMultiplier(1.55 + 3.6 - 0.15); // Amalgam Serration + Primary Arcane at Full Stacks - Vile Acceleration
 	// DC.setRadialDamageMultiplier(2.75 * 2); // 200% PWR STR Chroma Vex Armor
 
 	DC.setCriticalChanceBase(0.24);
-	DC.setCriticalChanceMultiplier(2 + 1.35); // Critical Delay + Argon Scope
+	DC.setCriticalChanceMultiplier(2); // Critical Delay
 	DC.setCriticalChanceAdditive(.45); // Arcane Avenger
-	DC.setCriticalChanceVigilante(0.05 * 1); // Vigilante Armaments
+	DC.setCriticalChanceVigilante(0.05 * 1); // Vigilante Supplies
 	// DC.setCriticalChanceAdditive(2); // Covenant Headshots
 
 	DC.setCriticalDamageBase(2.2);
@@ -74,42 +80,33 @@ double calculateDamage(DamageCalculation & DC) {
 	DC.setElementalMultiplier(3, 0.6); // Toxin 60/60 for Viral
 
 	DC.setFactionDamageBase(1);
-	DC.setFactionDamageMultiplier(0.55); // Primed Faction Mod
+	DC.setFactionDamageMultiplier(0.3 * 2); // 200% PWR STR Subsumed Roar
 
-
-	return DC.getDamage();
+	DC.setViralProcs(10);
 }
 
-double applyViralProcs(int i) {
-	return 1 + (0.75 + 0.25 * i) * (i > 0 && i <= 10);
-}
-
-double calculateArmor(ArmorReduction& AR) {
+void calculateArmor(ArmorReduction& AR) {
 	// Heavy Gunner Stats : Base Armor = 500, Base Level = 8
 	AR.setBaseArmor(500);
 	AR.setBaseLevel(8);
 	AR.setLevel(100);
 	// AR.corrosiveProcs(10);
-	return AR.getArmorDR();
 }
 
-double calculateFrequency(FrequencyCalculation & FRC) {
+void calculateFrequency(FrequencyCalculation & FRC) {
 	FRC.setFireRateBase(4.67);
 	FRC.setFireRateMultiplier(0.9); // Vile Acceleration
 	//FRC.setFireRateMultiplier(0.35 * 2); // 200% PWR STR Harrow
 
 	FRC.setMagazineCapacityBase(200);
-	FRC.setMagazineCapacityMultiplier(0.55); // Primed Magazine Warp
+	//FRC.setMagazineCapacityMultiplier(0.55); // Primed Magazine Warp
 
 	FRC.setReloadTimeBase(5);
-	FRC.setReloadTimeDivider(0.55); // Primed Fast Hands
+	//FRC.setReloadTimeDivider(0.55); // Primed Fast Hands
 	//FRC.setReloadTimeDivider(0.7 * 2); // 200% PWR STR Harrow
 
 	FRC.setMultishotBase(1);
 	FRC.setMultishotMultiplier(0.8 + .3 * 5); // Galvanized Chamber at Full Stacks
-
-
-	return FRC.getAdjustedFireRate();
 }
 
 double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor) {

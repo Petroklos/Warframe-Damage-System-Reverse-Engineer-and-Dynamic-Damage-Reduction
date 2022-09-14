@@ -26,9 +26,10 @@ class DamageCalculation
 	WeakpointBonus WB;
 	ElementalDamage ED;
 	CriticalChance CC;
+	double vigilanteBonus;
 	CriticalDamage CD;
 	FactionDamage FD;
-	double vigilanteBonus;
+	int viralProcs;
 public:
 	DamageCalculation();
 
@@ -60,6 +61,9 @@ public:
 	void setFactionDamageBase(double);
 	void setFactionDamageMultiplier(double);
 	void setFactionDamageAdditive(double);
+
+	void setViralProcs(int);
+	double viralMultiplier();
 
 	double getDamage();
 };

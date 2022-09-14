@@ -6,9 +6,10 @@ DamageCalculation::DamageCalculation() {
 	WB = WeakpointBonus();
 	ED = ElementalDamage();
 	CC = CriticalChance();
+	vigilanteBonus = 0;
 	CD = CriticalDamage();
 	FD = FactionDamage();
-	vigilanteBonus = 0;
+	viralProcs = 0;
 }
 
 void DamageCalculation::setDamageBase(double d) { BD.setBase(d); }
@@ -40,11 +41,24 @@ void DamageCalculation::setFactionDamageBase(double d) { FD.setBase(d); }
 void DamageCalculation::setFactionDamageMultiplier(double d) { FD.setMultiplier(d); }
 void DamageCalculation::setFactionDamageAdditive(double d) { FD.setAdditive(d); }
 
+void DamageCalculation::setViralProcs(int i) {
+	if (i < 0)
+		viralProcs = 0;
+	else if (i > 10)
+		viralProcs = 10;
+	else
+		viralProcs = i;
+}
+
+double DamageCalculation::viralMultiplier() {
+	return 1 + (0.75 + 0.25 * viralProcs) * (viralProcs > 0);
+}
+
 double DamageCalculation::getDamage() {
 	double weakpointDamageCalculation = BD.calculateTotal() * WB.calculateTotal() + RD.calculateTotal();
 	double elementalDamageCalculation = weakpointDamageCalculation * ED.calculateTotal();
 	double criticalDamageCalculation = weakpointDamageCalculation * CD.calculateTotal(CC.calculateTotal(), CC.getVigilanteBonus());
 	double factionDamageCalculation = criticalDamageCalculation * FD.calculateTotal();
-
+	double viralDamageCalculation = factionDamageCalculation * viralMultiplier();
 	return factionDamageCalculation;
 }
