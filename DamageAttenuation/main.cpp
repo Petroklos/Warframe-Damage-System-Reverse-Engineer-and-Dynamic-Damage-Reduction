@@ -9,13 +9,17 @@
 #include "FrequencyCalculation.h"
 #include "ArmorReduction.h"
 
-#define isDebugging true;
+#define isDebugging true; // if this is set to "false", no calculated values will be printed to the console
+#if isDebugging
+void printDebug(double, double, double, double, double);
+#endif
 
 double calculateDamage(DamageCalculation &);
 double calculateFrequency(FrequencyCalculation &);
 double calculateArmor(ArmorReduction &);
 double applyViralProcs(int);
 double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor);
+
 
 int main() {
 	DamageCalculation DC;
@@ -38,12 +42,7 @@ int main() {
 	double attenuatedDamage = attenuateDamage(armoredDamage, estimatedDPS, notArmor); // won't Attenuate if notArmor == 0
 
 #if isDebugging
-	std::cout << "Total Damage is : " << totalDamage << std::endl
-		<< "Total Damage after Armor DR is : " << armoredDamage << std::endl
-		<< "Adjusted Shot Frequency is : " << adjustedFrequency << std::endl
-		<< "Estimated DPS after Armor DR is : " << estimatedDPS << std::endl
-		<< "Total Damage after Attenuation is : " << attenuatedDamage << std::endl
-		<< "Estimated DPS after Attenuation is : " << attenuatedDamage * adjustedFrequency << std::endl;
+	printDebug(totalDamage, armoredDamage, adjustedFrequency, estimatedDPS, attenuatedDamage);
 #endif
 
 	return 0;
@@ -120,3 +119,14 @@ double attenuateDamage(double totalDamage, double estimatedDPS, double notArmor)
 	double attenuateValue = 1 - part / (part + notArmor);
 	return attenuateValue * totalDamage;
 }
+
+#if isDebugging
+void printDebug(double totalDamage, double armoredDamage, double adjustedFrequency, double estimatedDPS, double attenuatedDamage) {
+	std::cout << "Total Damage is : " << totalDamage << std::endl
+		<< "Total Damage after Armor DR is : " << armoredDamage << std::endl
+		<< "Adjusted Shot Frequency is : " << adjustedFrequency << std::endl
+		<< "Estimated DPS after Armor DR is : " << estimatedDPS << std::endl
+		<< "Total Damage after Attenuation is : " << attenuatedDamage << std::endl
+		<< "Estimated DPS after Attenuation is : " << attenuatedDamage * adjustedFrequency << std::endl;
+}
+#endif
