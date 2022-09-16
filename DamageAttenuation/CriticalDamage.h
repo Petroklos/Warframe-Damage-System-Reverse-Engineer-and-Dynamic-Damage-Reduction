@@ -1,12 +1,9 @@
-#ifndef GS
-	#include "GenericStat.h"
-	#define GS
-#endif
+#include "Definitions.h"
 
 #pragma once
 class CriticalDamage : public GenericStat
 {
 	using GenericStat::GenericStat;
 public:
-	double calculateTotal(double, double);
+	double calculateTotal(int);
 };

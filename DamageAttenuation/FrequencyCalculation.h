@@ -1,14 +1,4 @@
-#ifndef BASICS
-#include <stdlib.h>
-#include <math.h>
-#include <iostream>
-#define BASICS
-#endif
-
-#ifndef GS
-#include "GenericStat.h"
-#define GS
-#endif
+#include "Definitions.h"
 
 #include "FireRate.h"
 #include "MagazineCapacity.h"

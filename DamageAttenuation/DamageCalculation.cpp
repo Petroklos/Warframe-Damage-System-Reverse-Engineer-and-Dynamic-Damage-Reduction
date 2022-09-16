@@ -10,6 +10,7 @@ DamageCalculation::DamageCalculation() {
 	CD = CriticalDamage();
 	FD = FactionDamage();
 	viralProcs = 0;
+	isIncarnon = false;
 }
 
 void DamageCalculation::setDamageBase(double d) { BD.setBase(d); }
@@ -49,16 +50,50 @@ void DamageCalculation::setViralProcs(int i) {
 	else
 		viralProcs = i;
 }
+double DamageCalculation::viralMultiplier() { return 1 + (0.75 + 0.25 * viralProcs) * (viralProcs > 0); }
 
-double DamageCalculation::viralMultiplier() {
-	return 1 + (0.75 + 0.25 * viralProcs) * (viralProcs > 0);
-}
+void DamageCalculation::setIsIncarnon(bool b) {	isIncarnon = b; }
 
 double DamageCalculation::getDamage() {
-	double weakpointDamageCalculation = BD.calculateTotal() * WB.calculateTotal() + RD.calculateTotal();
-	double elementalDamageCalculation = weakpointDamageCalculation * ED.calculateTotal();
-	double criticalDamageCalculation = weakpointDamageCalculation * CD.calculateTotal(CC.calculateTotal(), CC.getVigilanteBonus());
-	double factionDamageCalculation = criticalDamageCalculation * FD.calculateTotal();
-	double viralDamageCalculation = factionDamageCalculation * viralMultiplier();
-	return factionDamageCalculation;
+	// Base Damage
+	double damage = BD.calculateTotal() * WB.calculateTotal() + RD.calculateTotal();
+	#if	isDebugging
+	std::cout << "Base Damage: " << damage << std::endl;
+	#endif
+
+	//Elemental Damage
+	damage *= ED.calculateTotal();
+	#if	isDebugging
+	std::cout << "Elemental Damage: " << damage << std::endl;
+	#endif
+
+	// Critical or Incaron Damage
+	int critLevel = CC.calculateCritTier();
+	if (critLevel > 0) {
+		damage *= CD.calculateTotal(critLevel);
+		#if	isDebugging
+		std::cout << "Critical Damage: " << damage << std::endl;
+		#endif
+	} else if (isIncarnon) {
+		damage *= (double)(1 + 20);
+		#if	isDebugging
+		std::cout << "Incarnon Damage: " << damage << std::endl;
+		#endif
+	}
+
+	// Faction Damage
+	damage *= FD.calculateTotal();
+	#if	isDebugging
+	std::cout << "Faction Damage: " << damage << std::endl;
+	#endif
+
+	// Viral Damage
+	damage *= viralMultiplier();
+	#if	isDebugging
+	std::cout << "Viral Damage: " << damage << std::endl << std::endl;
+	#endif
+
+	return damage;
 }
+
+double DamageCalculation::calculateFactionDamage() { return FD.calculateTotal(); }

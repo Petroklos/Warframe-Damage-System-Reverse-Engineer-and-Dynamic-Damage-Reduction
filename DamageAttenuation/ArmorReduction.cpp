@@ -7,6 +7,7 @@ ArmorReduction::ArmorReduction() {
 	isEximus = false;
 	netArmor = 0;
 	armorDR = 0;
+	armorStripMultiplier = 1;
 }
 
 ArmorReduction::ArmorReduction(double d, int l, int b) {
@@ -16,6 +17,7 @@ ArmorReduction::ArmorReduction(double d, int l, int b) {
 	isEximus = false;
 	calculateNetArmor();
 	calculateArmorDR();
+	armorStripMultiplier = 1;
 }
 
 ArmorReduction::ArmorReduction(double d, int l, int b, bool e) {
@@ -25,6 +27,7 @@ ArmorReduction::ArmorReduction(double d, int l, int b, bool e) {
 	isEximus = b;
 	calculateNetArmor();
 	calculateArmorDR();
+	armorStripMultiplier = 1;
 }
 
 void ArmorReduction::setBaseArmor(double d) {
@@ -46,7 +49,10 @@ void ArmorReduction::setBaseLevel(int i) {
 }
 
 void ArmorReduction::calculateNetArmor() {
-	//if (isEximus == false) {
+	// Apply Armor Reduction
+	double currentArmor = baseLevel * armorStripMultiplier;
+	if (currentArmor > 0) {
+		//if (isEximus == false) {
 		double t = (level - baseLevel - 70) / 10;
 
 		double s;
@@ -64,10 +70,20 @@ void ArmorReduction::calculateNetArmor() {
 		double f2 = 1 + 0.4 * pow((level - baseLevel), 0.75);
 
 		netArmor = ((f1 * (1 - s)) + (f2 * s)) * baseArmor;
-	//}
+		//}
+	}
 }
 
 void ArmorReduction::calculateArmorDR() { armorDR = 1 - (netArmor / (netArmor + 300)); }
+
+void ArmorReduction::armorStrip(double d) {
+	if (d < 0) d == 0;
+	if (d > 1) d == 1;
+	armorStripMultiplier -= d;
+	if (armorStripMultiplier < 0) armorStripMultiplier = 0;
+	calculateNetArmor();
+	calculateArmorDR();
+}
 
 double ArmorReduction::getNetArmor() { return netArmor; }
 double ArmorReduction::getArmorDR() { return armorDR; }

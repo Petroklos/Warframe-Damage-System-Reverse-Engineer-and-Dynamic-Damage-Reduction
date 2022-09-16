@@ -1,19 +1,9 @@
-#ifndef BASICS
-	#include <stdlib.h>
-	#include <math.h>
-	#include <iostream>
-	#define BASICS
-#endif
-
-#ifndef GS
-	#include "GenericStat.h"
-	#define GS
-#endif
+#include "Definitions.h"
 
 #include "BaseDamage.h"
 #include "RadialDamage.h"
 #include "WeakpointBonus.h"
-#include "ElementalDamage.h";
+#include "ElementalDamage.h"
 #include "CriticalChance.h"
 #include "CriticalDamage.h"
 #include "FactionDamage.h"
@@ -30,6 +20,8 @@ class DamageCalculation
 	CriticalDamage CD;
 	FactionDamage FD;
 	int viralProcs;
+	bool isIncarnon;
+
 public:
 	DamageCalculation();
 
@@ -65,6 +57,8 @@ public:
 	void setViralProcs(int);
 	double viralMultiplier();
 
-	double getDamage();
-};
+	void setIsIncarnon(bool);
 
+	double getDamage();
+	double calculateFactionDamage();
+};

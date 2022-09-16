@@ -1,7 +1,4 @@
-#ifndef GS
-	#include "GenericStat.h"
-	#define GS
-#endif
+#include "Definitions.h"
 
 #pragma once
 class RadialDamage : public GenericStat {

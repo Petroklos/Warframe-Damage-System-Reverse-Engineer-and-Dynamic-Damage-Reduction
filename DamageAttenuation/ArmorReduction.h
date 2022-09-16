@@ -1,9 +1,4 @@
-#ifndef BASICS
-	#include <stdlib.h>
-	#include <math.h>
-	#include <iostream>
-	#define BASICS
-#endif
+#include "Definitions.h"
 
 #pragma once
 class ArmorReduction
@@ -14,6 +9,7 @@ class ArmorReduction
 	bool isEximus;
 	double netArmor;
 	double armorDR;
+	double armorStripMultiplier;
 public:
 	ArmorReduction();
 	ArmorReduction(double, int, int);
@@ -25,6 +21,8 @@ public:
 
 	void calculateNetArmor();
 	void calculateArmorDR();
+	
+	void armorStrip(double d);
 
 	double getNetArmor();
 	double getArmorDR();

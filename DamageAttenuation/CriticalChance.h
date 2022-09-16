@@ -1,7 +1,4 @@
-#ifndef GS
-	#include "GenericStat.h"
-	#define GS
-#endif
+#include "Definitions.h"
 
 #pragma once
 class CriticalChance : public GenericStat
@@ -13,4 +10,6 @@ public:
 
 	void setVigilanteBonus(double);
 	double getVigilanteBonus();
+
+	int calculateCritTier();
 };
