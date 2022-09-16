@@ -185,7 +185,7 @@ void printDebug(double totalDamage, double armoredDamage, double adjustedFrequen
 	std::cout << "Total Damage is : " << totalDamage << std::endl
 		<< "Total Damage after Armor DR is : " << armoredDamage << std::endl
 		<< "Adjusted Shot Frequency is : " << adjustedFrequency << std::endl
-		<< "Estimated DPS after Armor DR is : " << estimatedDPS << std::endl
+		<< "Estimated DPS after Armor DR is : " << estimatedDPS << std::endl << std::endl
 		<< "Total Damage after Attenuation is : " << attenuatedDamage << std::endl
 		<< "Estimated DPS after Attenuation is : " << attenuatedDamage * adjustedFrequency << std::endl;
 }
