@@ -9,56 +9,58 @@
 #include "FactionDamage.h"
 
 #pragma once
-class DamageCalculation
-{
-	BaseDamage BD;
-	RadialDamage RD;
-	WeakpointBonus WB;
-	ElementalDamage ED;
-	CriticalChance CC;
-	double vigilanteBonus;
-	CriticalDamage CD;
-	FactionDamage FD;
-	int viralProcs;
-	bool isIncarnon;
 
+class DamageCalculation {
 public:
-	DamageCalculation();
+    // Default constructor
+    DamageCalculation();
 
-	void setDamageBase(double);
-	void setDamageMultiplier(double);
-	void setDamageAdditive(double);
+    // Setter functions
+    void setDamageBase(double d);
+    void setDamageMultiplier(double d);
+    void setDamageAdditive(double d);
 
-	void setRadialDamageBase(double);
-	void setRadialDamageMultiplier(double);
-	void setRadialDamageAdditive(double);
+    void setRadialDamageBase(double d);
+    void setRadialDamageMultiplier(double d);
+    void setRadialDamageAdditive(double d);
 
-	void setWeakpointBonusBase(double);
-	void setWeakpointBonusMultiplier(double);
-	void setWeakpointBonusAdditive(double);
+    void setWeakpointBonusBase(double d);
+    void setWeakpointBonusMultiplier(double d);
+    void setWeakpointBonusAdditive(double d);
 
-	void setElementalBase(double);
-	void setElementalMultiplier(int, double);
-	void setElementalAdditive(double);
+    void setElementalMultiplier(int i, double d); // Integer denotes the Elemental Type, double denotes the Value
 
-	void setCriticalChanceBase(double);
-	void setCriticalChanceMultiplier(double);
-	void setCriticalChanceAdditive(double);
-	void setCriticalChanceVigilante(double);
+    void setCriticalChanceBase(double d);
+    void setCriticalChanceMultiplier(double d);
+    void setCriticalChanceAdditive(double d);
+    void setCriticalChanceVigilante(double d);
 
-	void setCriticalDamageBase(double);
-	void setCriticalDamageMultiplier(double);
-	void setCriticalDamageAdditive(double);
+    void setCriticalDamageBase(double d);
+    void setCriticalDamageMultiplier(double d);
+    void setCriticalDamageAdditive(double d);
 
-	void setFactionDamageBase(double);
-	void setFactionDamageMultiplier(double);
-	void setFactionDamageAdditive(double);
+    void setFactionDamageBase(double d);
+    void setFactionDamageMultiplier(double d);
+    void setFactionDamageAdditive(double d);
 
-	void setViralProcs(int);
-	double viralMultiplier();
+    void setViralProcs(int i);
+    double viralMultiplier();
 
-	void setIsIncarnon(bool);
+    void setIsIncarnon(bool b);
 
-	double getDamage();
-	double calculateFactionDamage();
+    // Getter functions
+    double getDamage();
+    double calculateFactionDamage();
+
+private:
+    BaseDamage BD;
+    RadialDamage RD;
+    WeakpointBonus WB;
+    ElementalDamage ED;
+    CriticalChance CC;
+    double vigilanteBonus;
+    CriticalDamage CD;
+    FactionDamage FD;
+    int viralProcs;
+    bool isIncarnon;
 };

@@ -1,31 +1,39 @@
 #include "Definitions.h"
 
 #pragma once
-class ArmorReduction
-{
-	double baseArmor;
-	int level;
-	int baseLevel;
-	bool isEximus;
-	double netArmor;
-	double armorDR;
-	double armorStripMultiplier;
+
+class ArmorReduction {
 public:
-	ArmorReduction();
-	ArmorReduction(double, int, int);
-	ArmorReduction(double, int, int, bool);
+    // Constructors
+    ArmorReduction();
+    ArmorReduction(double baseArmor, int level, int baseLevel);
+    ArmorReduction(double baseArmor, int level, int baseLevel, bool isEximus);
 
-	void setBaseArmor(double);
-	void setLevel(int);
-	void setBaseLevel(int);
+    // Setter functions
+    void setBaseArmor(double baseArmor);
+    void setLevel(int level);
+    void setBaseLevel(int baseLevel);
 
-	void calculateNetArmor();
-	void calculateArmorDR();
-	
-	void armorStrip(double d);
+    // Calculate the net armor value and armor damage reduction
+    void calculateNetArmor();
+    void calculateArmorDR();
 
-	double getNetArmor();
-	double getArmorDR();
+    // Apply armor stripping to the enemy
+    void armorStrip(double d);
 
-	void corrosiveProcs(int);
+    // Get the net armor value and armor damage reduction
+    double getNetArmor();
+    double getArmorDR();
+
+    // Apply corrosive procs to the enemy
+    void corrosiveProcs(int);
+
+private:
+    double baseArmor;
+    int level;
+    int baseLevel;
+    bool isEximus;
+    double netArmor;
+    double armorDR;
+    double armorStripMultiplier;
 };

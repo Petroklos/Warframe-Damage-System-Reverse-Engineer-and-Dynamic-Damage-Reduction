@@ -1,35 +1,64 @@
 #include "GenericStat.h"
 
+// Default constructor
 GenericStat::GenericStat() {
-	base = 0;
-	multiplier = 1;
-	additive = 0;
+    base = 0;
+    multiplier = 1;
+    additive = 0;
 }
 
-GenericStat::GenericStat(double d) {
-	base = d;
-	multiplier = 1;
-	additive = 0;
+// Constructor that sets the base value of the stat
+GenericStat::GenericStat(double base) {
+    this->base = base;
+    multiplier = 1;
+    additive = 0;
 }
 
-GenericStat::GenericStat(double d, double m) {
-	base = d;
-	multiplier = 1 + m;
-	additive = 0;
+// Constructor that sets the base value and multiplier of the stat
+GenericStat::GenericStat(double base, double multiplier) {
+    this->base = base;
+    this->multiplier = 1 + multiplier;
+    additive = 0;
 }
 
-GenericStat::GenericStat(double d, double m, double a) {
-	base = d;
-	multiplier = 1 + m;
-	additive = a;
+// Constructor that sets the base value, multiplier, and additive value of the stat
+GenericStat::GenericStat(double base, double multiplier, double additive) {
+    this->base = base;
+    this->multiplier = 1 + multiplier;
+    this->additive = additive;
 }
 
-void GenericStat::setBase(double b) { base = b; }
-void GenericStat::setMultiplier(double m) { multiplier += m; }
-void GenericStat::setAdditive(double a) { additive += a; }
+// Set the base value of the stat
+void GenericStat::setBase(double base) {
+    this->base = base;
+}
 
-double GenericStat::getBase() { return base; }
-double GenericStat::getMultiplier() { return multiplier; }
-double GenericStat::getAdditive() { return additive; }
+// Set the multiplier of the stat
+void GenericStat::setMultiplier(double multiplier) {
+    this->multiplier += multiplier;
+}
 
-double GenericStat::calculateTotal() { return base * multiplier + additive; }
+// Set the additive value of the stat
+void GenericStat::setAdditive(double additive) {
+    this->additive += additive;
+}
+
+// Get the base value of the stat
+double GenericStat::getBase() {
+    return base;
+}
+
+// Get the multiplier of the stat
+double GenericStat::getMultiplier() {
+    return multiplier;
+}
+
+// Get the additive value of the stat
+double GenericStat::getAdditive() {
+    return additive;
+}
+
+// Calculate the total value of the stat
+double GenericStat::calculateTotal() {
+    return base * multiplier + additive;
+}

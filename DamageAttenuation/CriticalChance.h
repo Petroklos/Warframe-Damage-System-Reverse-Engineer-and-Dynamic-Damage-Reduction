@@ -1,9 +1,7 @@
 #include "Definitions.h"
 
 #pragma once
-class CriticalChance : public GenericStat
-{
-	double vigilanteBonus;
+class CriticalChance : public GenericStat {
 public:
 	CriticalChance();
 	CriticalChance(double, double, double, double);
@@ -12,4 +10,7 @@ public:
 	double getVigilanteBonus();
 
 	int calculateCritTier();
+
+private:
+	double vigilanteBonus;
 };

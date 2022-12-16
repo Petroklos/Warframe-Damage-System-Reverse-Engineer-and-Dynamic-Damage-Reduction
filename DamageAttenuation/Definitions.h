@@ -1,15 +1,11 @@
-#pragma once
+#pragma once  // This directive ensures that the header file is only included once
 
-#ifndef BASICS
-	#include <stdlib.h>
-	#include <math.h>
-	#include <iostream>
-	#define BASICS
-#endif
+#include <cstdlib>
+#include <ctime>
+#include <math.h>
+#include <iostream>
+#include <iomanip>	// std::cout << std::setprecision(someNumber);
 
-#ifndef GS
-	#include "GenericStat.h"
-	#define GS
-#endif
+#include "GenericStat.h"
 
 #define isDebugging true

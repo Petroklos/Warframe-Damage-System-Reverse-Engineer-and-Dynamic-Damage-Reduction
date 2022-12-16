@@ -1,8 +1,4 @@
 #include "Definitions.h"
 
 #pragma once
-class FactionDamage :
-    public GenericStat
-{
-};
-
+class FactionDamage : public GenericStat {};

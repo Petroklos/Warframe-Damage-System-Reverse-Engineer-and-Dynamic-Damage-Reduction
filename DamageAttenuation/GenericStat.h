@@ -1,22 +1,30 @@
 #pragma once
-class GenericStat
-{
-	double base;
-	double multiplier;
-	double additive;
+
+#include "Definitions.h"  // Include the "Definitions.h" header
+
+class GenericStat {
 public:
-	GenericStat();
-	GenericStat(double);
-	GenericStat(double, double);
-	GenericStat(double, double, double);
+    // Constructors
+    GenericStat();
+    GenericStat(double base);
+    GenericStat(double base, double multiplier);
+    GenericStat(double base, double multiplier, double additive);
 
-	void setBase(double);
-	void setMultiplier(double);
-	void setAdditive(double);
+    // Setter functions
+    void setBase(double base);
+    void setMultiplier(double multiplier);
+    void setAdditive(double additive);
 
-	double getBase();
-	double getMultiplier();
-	double getAdditive();
+    // Getter functions
+    double getBase();
+    double getMultiplier();
+    double getAdditive();
 
-	double calculateTotal();
+    // Calculate the total value of the stat
+    double calculateTotal();
+
+private:
+    double base;
+    double multiplier;
+    double additive;
 };
