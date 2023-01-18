@@ -1,4 +1,4 @@
-# Warframe Damage Calculation and Dynamic Damage Reduction
+# Warframe Damage System and Dynamic Damage Reduction
 
 Writing out Warframe's Damage Calculation to test out potential Dynamic Damage Resistance Formulas and Implementations.
 
