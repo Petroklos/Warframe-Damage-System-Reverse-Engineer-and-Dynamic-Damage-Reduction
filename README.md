@@ -6,7 +6,7 @@ The "Better Damage Attenuation" formula and idea are taken from https://forums.w
 
 The "Damage Compressor" is inspired by Audio Compressors and this article on NovaRO's Dynamic Damage Adjustment https://www.novaragnarok.com/wiki/Dynamic_Damage_Adjustment
 
-Everything is based on data from the Warframe Wiki, except for the Attenuation formula, which is taken from 
+Everything else is based on data taken from the Warframe Wiki.
 
 # What it do?
 
