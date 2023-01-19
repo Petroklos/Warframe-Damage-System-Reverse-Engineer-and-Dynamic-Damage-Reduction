@@ -2,7 +2,8 @@
 
 Writing out Warframe's Damage Calculation to test out potential Dynamic Damage Resistance Formulas and Implementations.
 
-The "Better Damage Attenuation" formula and idea are taken from https://forums.warframe.com/topic/1275520-a-better-damage-attenuation-formula/
+The "Better Damage Attenuation" formula and idea are taken from  
+https://forums.warframe.com/topic/1275520-a-better-damage-attenuation-formula/
 
 The "Damage Compressor" is inspired by Audio Compressors and this article on NovaRO's Dynamic Damage Adjustment https://www.novaragnarok.com/wiki/Dynamic_Damage_Adjustment
 
